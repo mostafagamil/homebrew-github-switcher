@@ -10,11 +10,7 @@ class GithubSwitcher < Formula
   depends_on "python@3.11"
 
   def install
-    venv = virtualenv_create(libexec, "python3.11")
-    system libexec/"bin/pip", "install", "-v", "github-switcher==#{version}"
-    
-    # Create wrapper script
-    (bin/"ghsw").write_env_script libexec/"bin/ghsw", PATH: "#{libexec}/bin:$PATH"
+    virtualenv_install_with_resources using: "python@3.11"
   end
 
   test do
