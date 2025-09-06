@@ -15,7 +15,7 @@ class GithubSwitcher < Formula
     
     # Install the wheel directly to avoid build system issues
     system libexec/"bin/pip", "install", "--upgrade", "pip"
-    system libexec/"bin/pip", "install", cached_download
+    system libexec/"bin/pip", "install", "github-switcher==0.1.0"
     
     # Create wrapper script
     (bin/"ghsw").write_env_script libexec/"bin/ghsw", PATH: "#{libexec}/bin:$PATH"
