@@ -10,11 +10,12 @@ class GithubSwitcher < Formula
   depends_on "python@3.11"
 
   def install
-    venv = virtualenv_create(libexec, "python@3.11")
+    # Create virtual environment with pip
+    system Formula["python@3.11"].opt_bin/"python3.11", "-m", "venv", libexec
     
     # Install the wheel directly to avoid build system issues
-    system venv/"bin/pip", "install", "--upgrade", "pip"
-    system venv/"bin/pip", "install", cached_download
+    system libexec/"bin/pip", "install", "--upgrade", "pip"
+    system libexec/"bin/pip", "install", cached_download
     
     # Create wrapper script
     (bin/"ghsw").write_env_script libexec/"bin/ghsw", PATH: "#{libexec}/bin:$PATH"
