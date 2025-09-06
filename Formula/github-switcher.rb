@@ -3,14 +3,20 @@ class GithubSwitcher < Formula
 
   desc "Professional CLI tool for managing multiple GitHub identities"
   homepage "https://github.com/mostafagamil/Github-Switcher"
-  url "https://files.pythonhosted.org/packages/source/g/github-switcher/github_switcher-0.1.0.tar.gz"
-  sha256 "aa17195aec9470e30f2f2666d0ad7ae685bebe710606a9af09404fa99f764cd6"
+  version "0.1.0"
   license "MIT"
 
   depends_on "python@3.11"
 
   def install
-    virtualenv_install_with_resources using: "python@3.11"
+    venv = virtualenv_create(libexec, "python@3.11")
+    
+    # Install directly from PyPI to avoid uv_build backend issues
+    system venv/"bin/pip", "install", "--upgrade", "pip"
+    system venv/"bin/pip", "install", "github-switcher==#{version}"
+    
+    # Create wrapper script
+    (bin/"ghsw").write_env_script libexec/"bin/ghsw", PATH: "#{libexec}/bin:$PATH"
   end
 
   test do
