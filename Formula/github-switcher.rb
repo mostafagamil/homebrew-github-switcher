@@ -3,8 +3,8 @@ class GithubSwitcher < Formula
 
   desc "Professional CLI tool for managing multiple GitHub identities"
   homepage "https://github.com/mostafagamil/Github-Switcher"
-  url "https://files.pythonhosted.org/packages/fd/9f/cb59f184698adccf580283486e4453ed2cf169b89e184c955889b3b33336/github_switcher-0.1.0-py3-none-any.whl"
-  sha256 "f0720c168021116bdae5f55f35e3ac18645845f2cd6d11bdbf1bfd75ee4760ce"
+  url "https://files.pythonhosted.org/packages/bd/76/3aa4dbf40d3091c2e6aa948be8915e2dc712aa0f2c9a5b2a7cdaf0a9a2d0/github_switcher-0.2.0-py3-none-any.whl"
+  sha256 "36a746aeb277cc0a56fb884879a184814081bd07d2c4e6c673a710fd0325addf"
   license "MIT"
 
   depends_on "python@3.11"
@@ -15,7 +15,7 @@ class GithubSwitcher < Formula
     
     # Install the wheel directly to avoid build system issues
     system libexec/"bin/pip", "install", "--upgrade", "pip"
-    system libexec/"bin/pip", "install", "github-switcher==0.1.0"
+    system libexec/"bin/pip", "install", "github-switcher==0.2.0"
     
     # Create wrapper script
     (bin/"ghsw").write_env_script libexec/"bin/ghsw", PATH: "#{libexec}/bin:$PATH"
